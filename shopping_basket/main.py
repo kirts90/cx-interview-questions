@@ -1,8 +1,11 @@
 import argparse
+import unittest
+from basket_pricer import Catalogue
+from shopping_basket_tests import CatalogueTests, OffersTests, BasketTests, BasketPricerTests
 
 
 def main():
-    pass
+    catalogue = Catalogue()
 
 
 ap = argparse.ArgumentParser()
@@ -14,6 +17,6 @@ args = vars(ap.parse_args())
 
 if __name__ == '__main__':
     if args["test"]:
-        pass
+        unittest.main()
     else:
         main()
