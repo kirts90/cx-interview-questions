@@ -1,17 +1,14 @@
 
 class Catalogue:
     def __init__(self):
-        self.catalogue = dict()
         # Name of the product (unique ID) and price
-        self.catalogue["Baked Beans"] = 0.99
-        self.catalogue["Biscuits"] = 1.20
-        self.catalogue["Sardines"] = 1.89
-        self.catalogue["Shampoo (Small)"] = 2.00
-        self.catalogue["Shampoo (Medium)"] = 2.50
-        self.catalogue["Shampoo (Large)"] = 3.50
+        self.catalogue = dict()
 
     def add(self, product_name, price):
-        self.catalogue[product_name] = price
+        if isinstance(price, float) or isinstance(price, int):
+            self.catalogue[product_name] = round(price, 2)
+        else:
+            raise ValueError("Value provided is not a float or integer")
 
     def remove(self, product_name):
         if product_name in self.catalogue:
