@@ -54,7 +54,14 @@ class CatalogueTests(unittest.TestCase):
 
 
 class OffersTests(unittest.TestCase):
-    pass
+    def test_calculate_discount(self):
+        pass
+
+    def test_buy_x_get_y_free(self):
+        pass
+
+    def test_percentage_discount(self):
+        pass
 
 
 class BasketTests(unittest.TestCase):
