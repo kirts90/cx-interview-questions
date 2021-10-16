@@ -6,6 +6,12 @@ from shopping_basket_tests import CatalogueTests, OffersTests, BasketTests, Bask
 
 def main():
     catalogue = Catalogue()
+    catalogue.add("Baked Beans", 0.99)
+    catalogue.add("Biscuits", 1.20)
+    catalogue.add("Sardines", 1.89)
+    catalogue.add("Shampoo (Small)", 2.00)
+    catalogue.add("Shampoo (Medium)", 2.50)
+    catalogue.add("Shampoo (Large)", 3.50)
 
 
 ap = argparse.ArgumentParser()
