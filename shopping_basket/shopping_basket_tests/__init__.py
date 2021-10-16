@@ -1,5 +1,5 @@
 import unittest
-from shopping_basket.basket_pricer import Catalogue, Offers, Basket
+from shopping_basket.basket_pricer import Catalogue, Offers, Basket, BasketPricer
 
 
 class CatalogueTests(unittest.TestCase):
@@ -111,4 +111,20 @@ class BasketTests(unittest.TestCase):
 
 
 class BasketPricerTests(unittest.TestCase):
-    pass
+    def test_get_subtotal(self):
+        pass
+
+    def test_get_discount(self):
+        pass
+
+    def test_get_total(self):
+        pass
+
+    def test_calculate_subtotal(self):
+        pass
+
+    def test_calculate_discount(self):
+        pass
+
+    def test_calculate_total(self):
+        pass
