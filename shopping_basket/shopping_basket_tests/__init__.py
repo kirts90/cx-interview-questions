@@ -3,7 +3,7 @@ from shopping_basket.basket_pricer import Catalogue
 
 
 class CatalogueTests(unittest.TestCase):
-    def test_catalogue_add(self):
+    def test_add(self):
         # Assumptions:
         # We assume negative prices are accepted
         # Rounding up/down is being done to the closest
@@ -37,7 +37,7 @@ class CatalogueTests(unittest.TestCase):
         self.assertRaises(ValueError, catalogue.add, "test", "8")
 
     @staticmethod
-    def test_catalogue_remove():
+    def test_remove():
         # Assumptions:
         # If key is wrong then do nothing (we could've raised an exception instead)
         catalogue = Catalogue()
@@ -48,7 +48,7 @@ class CatalogueTests(unittest.TestCase):
         catalogue.add("test", 5)
         catalogue.remove(0)
 
-    def test_catalogue_generic(self):
+    def test_generic(self):
         # Assumptions:
         # Invalid usage/access, will default to KeyError exception
         # We want to limit unexpected behaviour/usage but there is a diminishing returns to the value added vs dev time
