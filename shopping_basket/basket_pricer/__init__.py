@@ -11,8 +11,9 @@ class Catalogue:
             raise ValueError("Value provided is not a float or integer")
 
     def remove(self, product_name):
-        if product_name in self.catalogue:
-            del self.catalogue[product_name]
+        if product_name not in self.catalogue:
+            raise ValueError("Product name provided is not found in the catalogue")
+        del self.catalogue[product_name]
 
 
 class Offers:
@@ -35,8 +36,18 @@ class Basket:
         # Name of the product (unique ID) and quantity
         self.basket = dict()
 
-    def add(self, name, quantity):
-        pass
+    def add(self, product_name, quantity):
+        if product_name not in self.catalogue.catalogue:
+            raise ValueError("Product provided not found in the catalogue")
+        if isinstance(quantity, int):
+            if quantity > 0:
+                self.basket[product_name] = quantity
+            else:
+                self.remove(product_name)
+        else:
+            raise ValueError("Value provided is not an integer")
 
-    def remove(self, name, quantity):
-        pass
+    def remove(self, product_name):
+        if product_name not in self.catalogue.catalogue or product_name not in self.basket:
+            raise ValueError("Product not found in catalogue or basket")
+        del self.basket[product_name]
