@@ -111,20 +111,82 @@ class BasketTests(unittest.TestCase):
 
 
 class BasketPricerTests(unittest.TestCase):
-    def test_get_subtotal(self):
-        pass
-
-    def test_get_discount(self):
-        pass
-
-    def test_get_total(self):
-        pass
-
     def test_calculate_subtotal(self):
-        pass
+        # Assumptions:
+        # Critical error handling is being done in the other classes.
+        # We assume data integrity, however, in a production environment there should be well defined scenarios and
+        # use cases for the unexpected with special exceptions accordingly.
 
-    def test_calculate_discount(self):
+        catalogue = Catalogue()
+        catalogue.add("Baked Beans", 0.99)
+        catalogue.add("Biscuits", 1.20)
+        catalogue.add("Sardines", 1.89)
+        catalogue.add("Shampoo (Small)", 2.00)
+        catalogue.add("Shampoo (Medium)", 2.50)
+        catalogue.add("Shampoo (Large)", 3.50)
+        offers = Offers()
+
+        basket = Basket(catalogue)
+        basket.add("Baked Beans", 4)
+        basket.add("Biscuits", 1)
+        basket_pricer = BasketPricer(catalogue, offers, basket)
+        self.assertEqual(basket_pricer.subtotal, 5.16)
+
+        basket = Basket(catalogue)
+        basket.add("Baked Beans", 2)
+        basket.add("Biscuits", 1)
+        basket.add("Sardines", 2)
+        basket_pricer = BasketPricer(catalogue, offers, basket)
+        self.assertEqual(basket_pricer.subtotal, 6.96)
+
+        basket = Basket(catalogue)
+        basket.add("Baked Beans", 51)
+        basket.add("Biscuits", 100)
+        basket.add("Sardines", 150)
+        basket_pricer = BasketPricer(catalogue, offers, basket)
+        self.assertEqual(basket_pricer.subtotal, 453.99)
+
+    def test_calculate_discount(self):  # TODO: Need to implement Offers first
         pass
 
     def test_calculate_total(self):
-        pass
+        catalogue = Catalogue()
+        catalogue.add("Baked Beans", 0.99)
+        catalogue.add("Biscuits", 1.20)
+        catalogue.add("Sardines", 1.89)
+        catalogue.add("Shampoo (Small)", 2.00)
+        catalogue.add("Shampoo (Medium)", 2.50)
+        catalogue.add("Shampoo (Large)", 3.50)
+        offers = Offers()
+        # TODO: add offers and update total values in assertEqual
+
+        basket = Basket(catalogue)
+        basket.add("Baked Beans", 4)
+        basket.add("Biscuits", 1)
+        basket_pricer = BasketPricer(catalogue, offers, basket)
+        self.assertEqual(basket_pricer.total, 5.16)
+
+        basket = Basket(catalogue)
+        basket.add("Baked Beans", 2)
+        basket.add("Biscuits", 1)
+        basket.add("Sardines", 2)
+        basket_pricer = BasketPricer(catalogue, offers, basket)
+        self.assertEqual(basket_pricer.total, 6.96)
+
+        basket = Basket(catalogue)
+        basket.add("Baked Beans", 51)
+        basket.add("Biscuits", 100)
+        basket.add("Sardines", 150)
+        basket_pricer = BasketPricer(catalogue, offers, basket)
+        self.assertEqual(basket_pricer.total, 453.99)
+
+    def test_init(self):
+        catalogue = Catalogue()
+        offers = Offers()
+        basket = Basket(catalogue)
+        basket_pricer = BasketPricer(catalogue, offers, basket)
+
+        self.assertEqual(basket_pricer.subtotal, 0)
+        self.assertEqual(basket_pricer.discount, 0)
+        self.assertEqual(basket_pricer.total, 0)
+        self.assertEqual(basket_pricer.currency, "£")
