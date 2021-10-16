@@ -51,3 +51,35 @@ class Basket:
         if product_name not in self.catalogue.catalogue or product_name not in self.basket:
             raise ValueError("Product not found in catalogue or basket")
         del self.basket[product_name]
+
+
+class BasketPricer:
+    def __init__(self, catalogue, offers, basket):
+        self.catalogue = catalogue.catalogue
+        self.offers = offers
+        self.basket = basket
+
+        self.subtotal = self.calculate_subtotal()
+        self.discount = 0
+        self.total = self.calculate_total()
+        self.currency = "£"
+
+    def calculate_subtotal(self):
+        subtotal = 0
+        for key, value in self.basket.basket.items():
+            subtotal += self.catalogue[key] * value
+        return round(subtotal, 2)
+
+    def calculate_discount(self):
+        pass
+
+    def calculate_total(self):
+        if self.subtotal >= self.discount:
+            return round(self.subtotal - self.discount, 2)
+        else:
+            return 0
+
+    def __del__(self):
+        print("subtotal:", self.currency + str(self.subtotal))
+        print("discount:", self.currency + str(self.discount))
+        print("total:", self.currency + str(self.total))
