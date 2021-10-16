@@ -13,11 +13,20 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(catalogue.catalogue["test"], 6)
 
         catalogue.add("test", 6.5566778899)
+        self.assertEqual(catalogue.catalogue["test"], 6.56)
+
+        catalogue.add("test", 6.5546778899)
         self.assertEqual(catalogue.catalogue["test"], 6.55)
 
-        self.assertRaises(ValueError, catalogue.add("test", "asdf"))
-        self.assertRaises(ValueError, catalogue.add("test", "£7"))
-        self.assertRaises(ValueError, catalogue.add("test", "8"))
+        catalogue.add("test", 6.5555555)
+        self.assertEqual(catalogue.catalogue["test"], 6.56)
+
+        catalogue.add("test", 6.5)
+        self.assertEqual(catalogue.catalogue["test"], 6.5)
+
+        self.assertRaises(ValueError, catalogue.add, "test", "asdf")
+        self.assertRaises(ValueError, catalogue.add, "test", "£7")
+        self.assertRaises(ValueError, catalogue.add, "test", "8")
 
     @staticmethod
     def test_catalogue_remove():
