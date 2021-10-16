@@ -1,6 +1,6 @@
 import argparse
 import unittest
-from basket_pricer import Catalogue
+from basket_pricer import Catalogue, Offers, Basket
 from shopping_basket_tests import CatalogueTests, OffersTests, BasketTests, BasketPricerTests
 
 
@@ -13,10 +13,15 @@ def main():
     catalogue.add("Shampoo (Medium)", 2.50)
     catalogue.add("Shampoo (Large)", 3.50)
 
+    offers = Offers()
+    basket = Basket(catalogue)
+    basket.add("Baked Beans", 4)
+    basket.add("Biscuits", 1)
+
 
 ap = argparse.ArgumentParser()
 
-ap.add_argument("-t", "--test", required=False, default=False, help="Execute all unit tests")
+ap.add_argument("-t", "--test", required=False, default=True, help="Execute all unit tests")
 
 args = vars(ap.parse_args())
 
