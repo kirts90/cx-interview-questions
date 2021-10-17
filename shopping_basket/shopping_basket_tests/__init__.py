@@ -1,5 +1,5 @@
 import unittest
-from shopping_basket.basket_pricer import Catalogue, Offers, Basket, BasketPricer
+from basket_pricer import Catalogue, Offers, Basket, BasketPricer
 
 
 class CatalogueTests(unittest.TestCase):

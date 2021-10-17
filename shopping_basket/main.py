@@ -31,13 +31,12 @@ def main():
 
 ap = argparse.ArgumentParser()
 
-ap.add_argument("-t", "--test", required=False, default=False, help="Execute all unit tests")
-
+ap.add_argument("-t", "--test", required=False, dest='test', action='store_true', default=False,
+                help="Execute all unit tests")
 args = vars(ap.parse_args())
-
 
 if __name__ == '__main__':
     if args["test"]:
-        unittest.main()
+        unittest.main(argv=[''])
     else:
         main()
